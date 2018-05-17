@@ -1,7 +1,7 @@
 /*  Author: Andrew Givens
 **  Date: 5/2/2018
 **  Notes:  Adding javascript to dynamically create the html form. This will allow for easier editing in the future.
-**          Adding jquery functionality for bootstrap components 
+**          Adding jquery functionality for bootstrap components
 */
 
 // these will be any single textfield rows to appear at the top of the form
@@ -18,11 +18,11 @@ const armourOptionLabels = ['Armour Type', 'Trait', 'Enchantment'];
 // Weapon Data
 const weaponSlots = ['Primary', 'Secondary'];
 const weaponOptionLabels = ['Weapon Type', 'Trait', 'Enchantment'];
-const primaryWeaponTypes = ['Axe', 'Mace', 'Sword', 'Battle Axe', 'Maul', 'Greatsword', 'Dagger', 'Bow', 'Inferno Staff', 
+const primaryWeaponTypes = ['Axe', 'Mace', 'Sword', 'Battle Axe', 'Maul', 'Greatsword', 'Dagger', 'Bow', 'Inferno Staff',
                             'Frost Staff', 'Lightning Staff', 'Restoration Staff'];
 var secondaryWeaponTypes = ['Axe', 'Mace', 'Sword', 'Dagger', 'Shield'];
 const weaponTraits = ['Charged', 'Defending', 'Infused', 'Nirnhoned', 'Powered', 'Precise', 'Sharpened', 'Training', 'Weighted'];
-const weaponEnchant = ['Flame', 'Frost', 'Shock', 'Poison', 'Foulness', 'Decrease Health', 'Hardening', 'Absorb Health', 
+const weaponEnchant = ['Flame', 'Frost', 'Shock', 'Poison', 'Foulness', 'Decrease Health', 'Hardening', 'Absorb Health',
                        'Absorb Magika', 'Absorb Stamina', 'Weapon Damage', 'Weakening', 'Crushing', 'Prismatic Onslaught'];
 
 function createSetNameTextbox(rowName){
@@ -76,7 +76,7 @@ function createDropdown(piece, dropdownLabel, optionsArr, opt1, opt2, opt3){
         case optionsArr[0]:
             var dropdownItems = opt1;
             break;
-        case optionsArr[1]: 
+        case optionsArr[1]:
             var dropdownItems = opt2;
             break;
         case optionsArr[2]:
@@ -218,4 +218,16 @@ $(document).ready(function() {
 
         document.getElementById(`${dropdownId}-Dropdown`).innerHTML = this.value;
     });
+
+    $('#Submit-Btn').click(()=>{
+        var webhook = "https://discordapp.com/api/webhooks/444376028375285766/kzg-67tlzb2r2umWFo78NQEgjuxpLYKXW2uPzbVS5TzN9AUpYcQdaFxDpeR0nQYKnA5w";
+        var head_type = document.getElementById("#Head-Armour Type-Dropdown:first-child").innerHTML;
+        var content = `
+        Username: ${$("#ESO Username-input").val()}
+        Level: ${$("#Level-input").val()}
+        --Armour
+        Head: ${head_type}`;
+        //$.post(webhook,{})
+        console.log(content);
+    })
 });
