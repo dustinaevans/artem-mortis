@@ -28,6 +28,7 @@ const weaponEnchant = ['Flame', 'Frost', 'Shock', 'Poison', 'Foulness', 'Decreas
 function createSetNameTextbox(rowName){
     var setNameInputGroup = document.createElement('div');
     setNameInputGroup.setAttribute('class', 'input-group mb-3 col-2');
+    setNameInputGroup.setAttribute('id', `${rowName}-setName`);
     setNameInputGroup.setAttribute('style', 'padding-left:30px;');
 
     var prepend = document.createElement('div');
@@ -217,6 +218,34 @@ $(document).ready(function() {
         console.log(dropdownId);
 
         document.getElementById(`${dropdownId}-Dropdown`).innerHTML = this.value;
+        if(dropdownId == "Primary-Weapon Type"){
+            if(!secondaryWeaponTypes.includes(this.value)){
+                console.log("Two-Handed");
+                // disable secondary weapon types
+            }
+        }
+        if(dropdownId == "Secondary-Weapon Type" && this.value == "Shield"){
+            console.log(this.value);
+        }
+    });
+
+    $('.-Dropdown').click(function(){
+
+    });
+
+    $("button[id$='-label']").click(function(){
+        var rowName = this.id;
+        rowName = rowName.substring(0, rowName.indexOf('-'));
+        console.log(rowName);
+
+        if(this.className == 'btn btn-success col-sm-1'){
+            this.setAttribute('class', 'btn btn-danger col-sm-1');
+            $("div[id^="+rowName+"]").children().attr('disabled', true);
+        }
+        else {
+            this.setAttribute('class', 'btn btn-success col-sm-1');
+            $("div[id^="+rowName+"]").children().attr('disabled', false);
+        }
     });
 
     $('#Submit-Btn').click(()=>{
