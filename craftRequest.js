@@ -5,8 +5,8 @@
 */
 
 // these will be any single textfield rows to appear at the top of the form
-const playerInfo = ['ESO Username', 'Level'];
-const setName = "Set Name";
+const playerInfo = ['ESO-Username', 'Level'];
+const setName = "Set-Name";
 
 // armour rows that include the Armour Type, Trait, and Enchantment dropdowns
 const armourPieces = ['Head', 'Shoulders', 'Chest', 'Legs', 'Waist', 'Hands', 'Feet'];
@@ -250,12 +250,22 @@ $(document).ready(function() {
 
     $('#Submit-Btn').click(()=>{
         var webhook = "https://discordapp.com/api/webhooks/444376028375285766/kzg-67tlzb2r2umWFo78NQEgjuxpLYKXW2uPzbVS5TzN9AUpYcQdaFxDpeR0nQYKnA5w";
-        var head_type = document.getElementById("#Head-Armour Type-Dropdown:first-child").innerHTML;
+        var username = $("#ESO-Username-input").val();
+        var head = {
+            'type':document.getElementById("Head-Armour Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Head-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Head-Enchantment-Dropdown").innerHTML,
+            'set':$("#Head-Set-Name-input").val()
+        }
+        var shoulders = {
+            
+        }
         var content = `
-        Username: ${$("#ESO Username-input").val()}
+        Username: ${username}
         Level: ${$("#Level-input").val()}
+        Piece: Type Trait Enchantment Set-Name
         --Armour
-        Head: ${head_type}`;
+        Head: ${head.type} ${head.trait} ${head.enchant} ${head.set}`;
         //$.post(webhook,{})
         console.log(content);
     })
