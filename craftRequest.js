@@ -258,15 +258,83 @@ $(document).ready(function() {
             'set':$("#Head-Set-Name-input").val()
         }
         var shoulders = {
-            
+            'type':document.getElementById("Shoulders-Armour Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Shoulders-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Shoulders-Enchantment-Dropdown").innerHTML,
+            'set':$("#Shoulders-Set-Name-input").val()
+        }
+        var chest = {
+            'type':document.getElementById("Chest-Armour Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Chest-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Chest-Enchantment-Dropdown").innerHTML,
+            'set':$("#Chest-Set-Name-input").val()
+        }
+        var legs = {
+            'type':document.getElementById("Legs-Armour Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Legs-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Legs-Enchantment-Dropdown").innerHTML,
+            'set':$("#Legs-Set-Name-input").val()
+        }
+        var waist = {
+            'type':document.getElementById("Waist-Armour Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Waist-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Waist-Enchantment-Dropdown").innerHTML,
+            'set':$("#Waist-Set-Name-input").val()
+        }
+        var hands = {
+            'type':document.getElementById("Hands-Armour Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Hands-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Hands-Enchantment-Dropdown").innerHTML,
+            'set':$("#Hands-Set-Name-input").val()
+        }
+        var feet = {
+            'type':document.getElementById("Feet-Armour Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Feet-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Feet-Enchantment-Dropdown").innerHTML,
+            'set':$("#Feet-Set-Name-input").val()
+        }
+        var weapon1 = {
+            'type':document.getElementById("Primary-Weapon Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Primary-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Primary-Enchantment-Dropdown").innerHTML,
+            'set':$("#Primary-Set-Name-input").val()
+        }
+        var weapon2 = {
+            'type':document.getElementById("Secondary-Weapon Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Secondary-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Secondary-Enchantment-Dropdown").innerHTML,
+            'set':$("#Secondary-Set-Name-input").val()
+        }
+        var weapon3 = {
+            'type':document.getElementById("Primary-Weapon Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Primary-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Primary-Enchantment-Dropdown").innerHTML,
+            'set':$("#Primary-Set-Name-input").val()
+        }
+        var weapon4 = {
+            'type':document.getElementById("Secondary-Weapon Type-Dropdown").innerHTML,
+            'trait':document.getElementById("Secondary-Trait-Dropdown").innerHTML,
+            'enchant':document.getElementById("Secondary-Enchantment-Dropdown").innerHTML,
+            'set':$("#Secondary-Set-Name-input").val()
         }
         var content = `
         Username: ${username}
         Level: ${$("#Level-input").val()}
-        Piece: Type Trait Enchantment Set-Name
         --Armour
-        Head: ${head.type} ${head.trait} ${head.enchant} ${head.set}`;
-        //$.post(webhook,{})
-        console.log(content);
+        Head: ${head.type} ${head.trait} ${head.enchant} ${head.set}
+        Shoulders: ${shoulders.type} ${shoulders.trait} ${shoulders.enchant} ${shoulders.set}
+        Chest: ${chest.type} ${chest.trait} ${chest.enchant} ${chest.set}
+        Legs: ${legs.type} ${legs.trait} ${legs.enchant} ${legs.set}
+        Waist: ${waist.type} ${waist.trait} ${waist.enchant} ${waist.set}
+        Hands: ${hands.type} ${hands.trait} ${hands.enchant} ${hands.set}
+        Feet: ${feet.type} ${feet.trait} ${feet.enchant} ${feet.set}
+        --Weapons
+        Weapon 1: ${weapon1.type} ${weapon1.trait} ${weapon1.type} ${weapon1.type}
+        Weapon 2: ${weapon2.type} ${weapon2.trait} ${weapon2.type} ${weapon2.type}
+        Weapon 3: ${weapon3.type} ${weapon3.trait} ${weapon3.type} ${weapon3.type}
+        Weapon 4: ${weapon4.type} ${weapon4.trait} ${weapon4.type} ${weapon4.type}`;
+        
+        $.post(webhook,{"content":content});
+        //console.log(content);
     })
 });
