@@ -101,6 +101,74 @@ function createDropdown(piece, dropdownLabel, optionsArr, opt1, opt2, opt3){
     return dropdownDiv;
 }
 
+function createDropdownClick() {
+    $('.dropdown-item').unbind();
+    $('.dropdown-item').click(function(){
+        var dropdownId = $(this).attr('data-id');
+
+        document.getElementById(`${dropdownId}-Dropdown`).innerHTML = this.value;
+        if(dropdownId == "Primary0-Weapon Type"){
+            if(!secondaryWeaponTypes.includes(this.value)){
+                document.getElementById('Secondary0-label').setAttribute('class', 'btn btn-danger col-sm-1');
+                $("div[id^=Secondary0]").children().attr('disabled', true);
+            }
+            else {
+                document.getElementById('Secondary0-label').setAttribute('class', 'btn btn-success col-sm-1');
+                $("div[id^=Secondary0]").children().attr('disabled', false);
+            }
+        }
+        if(dropdownId == "Primary1-Weapon Type"){
+            if(!secondaryWeaponTypes.includes(this.value)){
+                document.getElementById('Secondary1-label').setAttribute('class', 'btn btn-danger col-sm-1');
+                $("div[id^=Secondary1]").children().attr('disabled', true);
+            }
+            else {
+                document.getElementById('Secondary1-label').setAttribute('class', 'btn btn-success col-sm-1');
+                $("div[id^=Secondary1]").children().attr('disabled', false);
+            }
+        }
+        if(dropdownId == "Secondary0-Weapon Type" && this.value == "Shield"){
+            console.log(this.value + " 0");
+            switchDropdownMenu('Secondary0-Trait-dropdown-menu', armourTraits);
+            switchDropdownMenu('Secondary0-Enchantment-dropdown-menu', armourEnchant);
+        }
+        else if(dropdownId == "Secondary0-Weapon Type"){
+            console.log(this.value + " 0");
+            switchDropdownMenu('Secondary0-Trait-dropdown-menu', weaponTraits);
+            switchDropdownMenu('Secondary0-Enchantment-dropdown-menu', weaponEnchant);
+        }
+
+        if(dropdownId == "Secondary1-Weapon Type" && this.value == "Shield"){
+            console.log(this.value + " 1");
+            switchDropdownMenu('Secondary1-Trait-dropdown-menu', armourTraits);
+            switchDropdownMenu('Secondary1-Enchantment-dropdown-menu', armourEnchant);
+        }
+        else if(dropdownId == "Secondary1-Weapon Type"){
+            console.log(this.value + " 1");
+            switchDropdownMenu('Secondary1-Trait-dropdown-menu', weaponTraits);
+            switchDropdownMenu('Secondary1-Enchantment-dropdown-menu', weaponEnchant);
+        }
+    });
+}
+
+function switchDropdownMenu(divID, newItems) {
+    var dropdownMenu = document.getElementById(divID);
+    var dataID = dropdownMenu.children[0].getAttribute('data-id');
+    dropdownMenu.innerHTML = '';
+
+    newItems.forEach(function(type){
+        var option = document.createElement('button');
+        option.setAttribute('class', 'dropdown-item');
+        option.setAttribute('type', 'button');
+        option.setAttribute('data-id', dataID);
+        option.setAttribute('value', type);
+        option.innerHTML = type;
+        dropdownMenu.appendChild(option);
+    });
+
+    createDropdownClick();
+}
+
 // creates the form on page load
 $(document).ready(function() {
     var form = document.getElementById('form-body');
@@ -113,7 +181,12 @@ $(document).ready(function() {
         span.setAttribute('style', 'justify-content:center;');
 
         var inputGroup = document.createElement('div');
-        inputGroup.setAttribute('class', 'input-group mb-3 col-4');
+        if(rowLabel == playerInfo[0]) {
+            inputGroup.setAttribute('class', 'input-group mb-3 col-4');
+        }
+        else if(rowLabel == playerInfo[1]) {
+            inputGroup.setAttribute('class', 'input-group mb-3 col-2');
+        }
 
 
         var prepend = document.createElement('div');
@@ -134,6 +207,10 @@ $(document).ready(function() {
         input.setAttribute('aria-describedby', 'inputGroup-sizing-default');
         inputGroup.appendChild(input);
         span.appendChild(inputGroup);
+
+        if(rowLabel == playerInfo[1]){
+            span.appendChild(createDropdown('all', 'Improvement', ['Improvement'], ['Normal', 'Fine', 'Superior', 'Epic', 'Legendary'], [], []));
+        }
         form.appendChild(span);
     });
 
@@ -214,39 +291,7 @@ $(document).ready(function() {
     }
 
     // Click functions
-    $('.dropdown-item').click(function(){
-        var dropdownId = $(this).attr('data-id');
-        console.log(dropdownId);
-
-        document.getElementById(`${dropdownId}-Dropdown`).innerHTML = this.value;
-        if(dropdownId == "Primary0-Weapon Type"){
-            if(!secondaryWeaponTypes.includes(this.value)){
-                document.getElementById('Secondary0-label').setAttribute('class', 'btn btn-danger col-sm-1');
-                $("div[id^=Secondary0]").children().attr('disabled', true);
-            }
-            else {
-                document.getElementById('Secondary0-label').setAttribute('class', 'btn btn-success col-sm-1');
-                $("div[id^=Secondary0]").children().attr('disabled', false);
-            }
-        }
-        if(dropdownId == "Primary1-Weapon Type"){
-            if(!secondaryWeaponTypes.includes(this.value)){
-                document.getElementById('Secondary1-label').setAttribute('class', 'btn btn-danger col-sm-1');
-                $("div[id^=Secondary1]").children().attr('disabled', true);
-            }
-            else {
-                document.getElementById('Secondary1-label').setAttribute('class', 'btn btn-success col-sm-1');
-                $("div[id^=Secondary1]").children().attr('disabled', false);
-            }
-        }
-        if(dropdownId == "Secondary-Weapon Type" && this.value == "Shield"){
-            console.log(this.value);
-            // set traits and enchantments to armour
-        }
-        else{
-            // set traits and enchantments to weapons
-        }
-    });
+    createDropdownClick();
 
     $('.-Dropdown').click(function(){
 
