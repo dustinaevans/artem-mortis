@@ -179,12 +179,12 @@ $(document).ready(function() {
         weaponSlots.forEach(function(weaponSlot){
             var span = document.createElement('span');
             span.setAttribute('class', 'form-group row');
-            span.setAttribute('id', `${weaponSlot}-${i}-row`);
+            span.setAttribute('id', `${weaponSlot}${i}-row`);
             span.setAttribute('style', 'justify-content:center;');
 
             var label = document.createElement('button');
             label.setAttribute('class', 'btn btn-success col-sm-1');
-            label.setAttribute('id', `${weaponSlot}-label`);
+            label.setAttribute('id', `${weaponSlot}${i}-label`);
             label.setAttribute('type', 'button');
             label.innerHTML = weaponSlot;
             span.appendChild(label);
@@ -202,8 +202,9 @@ $(document).ready(function() {
             }
             weaponOptionLabels.forEach(function(dropdownLabel){
                 var labelNoSpace = dropdownLabel.replace('\s', '');
+                var weaponSlotDrop = weaponSlot + i.toString();
 
-                dropdownDiv = createDropdown(weaponSlot, dropdownLabel, weaponOptionLabels, weapons, weaponTraits, weaponEnchant);
+                dropdownDiv = createDropdown(weaponSlotDrop, dropdownLabel, weaponOptionLabels, weapons, weaponTraits, weaponEnchant);
                 span.appendChild(dropdownDiv);
 
             });
@@ -218,14 +219,32 @@ $(document).ready(function() {
         console.log(dropdownId);
 
         document.getElementById(`${dropdownId}-Dropdown`).innerHTML = this.value;
-        if(dropdownId == "Primary-Weapon Type"){
+        if(dropdownId == "Primary0-Weapon Type"){
             if(!secondaryWeaponTypes.includes(this.value)){
-                console.log("Two-Handed");
-                // disable secondary weapon types
+                document.getElementById('Secondary0-label').setAttribute('class', 'btn btn-danger col-sm-1');
+                $("div[id^=Secondary0]").children().attr('disabled', true);
+            }
+            else {
+                document.getElementById('Secondary0-label').setAttribute('class', 'btn btn-success col-sm-1');
+                $("div[id^=Secondary0]").children().attr('disabled', false);
+            }
+        }
+        if(dropdownId == "Primary1-Weapon Type"){
+            if(!secondaryWeaponTypes.includes(this.value)){
+                document.getElementById('Secondary1-label').setAttribute('class', 'btn btn-danger col-sm-1');
+                $("div[id^=Secondary1]").children().attr('disabled', true);
+            }
+            else {
+                document.getElementById('Secondary1-label').setAttribute('class', 'btn btn-success col-sm-1');
+                $("div[id^=Secondary1]").children().attr('disabled', false);
             }
         }
         if(dropdownId == "Secondary-Weapon Type" && this.value == "Shield"){
             console.log(this.value);
+            // set traits and enchantments to armour
+        }
+        else{
+            // set traits and enchantments to weapons
         }
     });
 
