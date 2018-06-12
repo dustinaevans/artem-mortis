@@ -128,23 +128,19 @@ function createDropdownClick() {
             }
         }
         if(dropdownId == "Secondary0-Weapon Type" && this.value == "Shield"){
-            console.log(this.value + " 0");
             switchDropdownMenu('Secondary0-Trait-dropdown-menu', armourTraits);
             switchDropdownMenu('Secondary0-Enchantment-dropdown-menu', armourEnchant);
         }
         else if(dropdownId == "Secondary0-Weapon Type"){
-            console.log(this.value + " 0");
             switchDropdownMenu('Secondary0-Trait-dropdown-menu', weaponTraits);
             switchDropdownMenu('Secondary0-Enchantment-dropdown-menu', weaponEnchant);
         }
 
         if(dropdownId == "Secondary1-Weapon Type" && this.value == "Shield"){
-            console.log(this.value + " 1");
             switchDropdownMenu('Secondary1-Trait-dropdown-menu', armourTraits);
             switchDropdownMenu('Secondary1-Enchantment-dropdown-menu', armourEnchant);
         }
         else if(dropdownId == "Secondary1-Weapon Type"){
-            console.log(this.value + " 1");
             switchDropdownMenu('Secondary1-Trait-dropdown-menu', weaponTraits);
             switchDropdownMenu('Secondary1-Enchantment-dropdown-menu', weaponEnchant);
         }
@@ -285,7 +281,7 @@ $(document).ready(function() {
                 span.appendChild(dropdownDiv);
 
             });
-            span.appendChild(createSetNameTextbox(weaponSlot));
+            span.appendChild(createSetNameTextbox(weaponSlot + i.toString()));
             form.appendChild(span);
         });
     }
@@ -293,14 +289,9 @@ $(document).ready(function() {
     // Click functions
     createDropdownClick();
 
-    $('.-Dropdown').click(function(){
-
-    });
-
     $("button[id$='-label']").click(function(){
         var rowName = this.id;
         rowName = rowName.substring(0, rowName.indexOf('-'));
-        console.log(rowName);
 
         if(this.className == 'btn btn-success col-sm-1'){
             this.setAttribute('class', 'btn btn-danger col-sm-1');
