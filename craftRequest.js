@@ -205,7 +205,7 @@ $(document).ready(function() {
         span.appendChild(inputGroup);
 
         if(rowLabel == playerInfo[1]){
-            span.appendChild(createDropdown('all', 'Improvement', ['Improvement'], ['Normal', 'Fine', 'Superior', 'Epic', 'Legendary'], [], []));
+            span.appendChild(createDropdown('all', 'Quality', ['Quality'], ['Normal', 'Fine', 'Superior', 'Epic', 'Legendary'], [], []));
         }
         form.appendChild(span);
     });
